@@ -1,39 +1,53 @@
 import pygame
 class Beat:
     """A beat in ritmo"""
-    
-    def __init__(self, direction, time, WIDTH, HEIGHT, sound):
+    WIDTH = 480
+    HEIGHT = 640
+    SPEED = 30
+    def __init__(self, direction, time, sound):
         self.direction = direction
         if(self.direction == -1):
-            self.x = 2*WIDTH/6
-            self.target = (WIDTH/6, 6 * HEIGHT/7)
+            self.x = 2*Beat.WIDTH/6
+            self.target = (Beat.WIDTH/6, 6 * Beat.HEIGHT/7)
             
         elif (self.direction == 1):
-            self.x = 4*WIDTH/6
-            self.target = (5 * WIDTH/6, 6 * HEIGHT/7)
+            self.x = 4*Beat.WIDTH/6
+            self.target = (5 * Beat.WIDTH/6, 6 * Beat.HEIGHT/7)
         else:
-            self.x = WIDTH/2
-            self.target = (WIDTH/2, 6 * HEIGHT/7)
-        self.sound_effect = pygame.mixer.Sound('assets/' + sound)
+            self.x = Beat.WIDTH/2
+            self.target = (Beat.WIDTH/2, 6 * Beat.HEIGHT/7)
+            
+        self.sound_effect = pygame.mixer.Sound(sound)
         self.s = 10
-        self.time = time
-        Beat.speed = 30
-        self.hit = False
-        self.y = self.target[1] - Beat.speed * self.time 
-        self.time_in_field = 0
-        self.time_in_field_calc = (6*HEIGHT/7 - HEIGHT/5)/Beat.speed
-        #Beat.speed = (self.target[1] - self.y) / self.time
-        self.y_check = 0
+        self.time = time * 6
         
+        self.hit = False
+        self.y = self.target[1] - Beat.SPEED * self.time 
+        self.time_in_field = 0
+        self.time_in_field_calc = (6*Beat.HEIGHT/7 - Beat.HEIGHT/5)/Beat.SPEED
+        #Beat.SPEED = (self.target[1] - self.y) / self.time
+        self.y_check = 0
+    def set_speed(self, speed):
+        Beat.SPEED = speed
     def getDir(self):
         return self.direction
             
+ 
     def getPos(self,time):
         #if(self.direction == 0):
-        return time*Beat.speed
+        return time*Beat.SPEED
     def getX(self, time):
         return time*(75/self.time_in_field_calc)
-    
+    def in_field(self, time):
+        if(getPos >= Beat.HEIGHT/7 and getPos <= 640):
+            return True
+        else:
+            return False
+    def out_of_bounds(self):
+        if self.y_check > Beat.HEIGHT + 10:
+            return True
+        else:
+            return False
     def getSize(self,time):
         """ values are hard coded sadlyf """
         if(self.direction == 0):
@@ -71,8 +85,13 @@ class Beat:
                 self.drawCircle(self.x, self.y_check, (0, 255, 0), int(self.s + move_s), self.hit, screen)
         #if(self.y_check > 490 and self.y_check < 495):
         #    self.sound_effect.play()
-    def isHit(self, direction):
-        print(self.y_check)
+    def is_hittable(self):
+        if not (self.hit):
+            if(self.y_check > 480 and self.y_check < 580):
+                return True
+        return False
+    def is_hit(self, direction):
+        #print(self.y_check)
         # not yet hit #
         if not (self.hit):
             if(self.y_check > 480 and self.y_check < 530 and direction == self.direction):

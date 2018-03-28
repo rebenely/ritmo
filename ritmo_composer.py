@@ -89,8 +89,9 @@ result = -1
 #temp2 = Beat(0, 30, 'assets/button-23.wav')
 
 if(len(sys.argv) == 4):
-    
+    f = open("assets/" + sys.argv[1] + "/" +sys.argv[3] +".ritmo","w+")
     song = Song(sys.argv[1], int(sys.argv[2]), sys.argv[3])
+    
 else:
     print("Input must be:\npython ritmo.py title speed difficulty")
     pygame.quit()
@@ -111,13 +112,7 @@ while True:
     
     #if len(beat_list) == 0:
     #    print('yehaw')
-    
-    for beat in beat_list:
-        
-        if not (beat.out_of_bounds()):
-            beat.render(beat_screen, time)
-        else:
-            beat_list.remove(beat)
+
     t = pygame.time.get_ticks()
     # deltaTime in seconds.
     deltaTime = (t - getTicksLastFrame)
@@ -165,14 +160,10 @@ while True:
                     pressed_key = 1
                 size_effect = 20
                 hit_happened = False
-                for beat in beat_list:
-                    
-                    if(beat.is_hittable() and hit_happened == False):
-                        result = beat.is_hit(pressed_key)
-                        score += result
-                        animator_result = 0
-                        hit_happened = True
-                        #print(result)
+
+                write_line = str(pressed_key) + ', ' + str(truncate(time/6 - 1/60, 3)) + ', CYCdh_ElecK03-Kick01.wav'
+                print(write_line)   
+                f.write("%s\n" % write_line)
     # beat screen #
     effect_screen.blit(beat_screen, (0, 0))   
     
@@ -226,5 +217,3 @@ while True:
     
     
     pygame.display.update()
-    
-
