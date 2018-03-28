@@ -164,6 +164,42 @@ while True:
                 write_line = str(pressed_key) + ', ' + str(truncate(time/6 - 1/60, 3)) + ', CYCdh_ElecK03-Kick01.wav'
                 print(write_line)   
                 f.write("%s\n" % write_line)
+            if event.key == pygame.K_k :
+                
+                pressed_key = 2
+                if(fill_c):
+                    started_c = True
+                    pressed_key = 0
+                if(fill_l):
+                    started_l = True
+                    pressed_key = -1
+                if(fill_r):
+                    started_r = True
+                    pressed_key = 1
+                size_effect = 20
+                hit_happened = False
+
+                write_line = str(pressed_key) + ', ' + str(truncate(time/6, 3)) + ', CYCdh_ElecK03-Clap01.wav'
+                print(write_line)   
+                f.write("%s\n" % write_line)
+            if event.key == pygame.K_l :
+                
+                pressed_key = 2
+                if(fill_c):
+                    started_c = True
+                    pressed_key = 0
+                if(fill_l):
+                    started_l = True
+                    pressed_key = -1
+                if(fill_r):
+                    started_r = True
+                    pressed_key = 1
+                size_effect = 20
+                hit_happened = False
+
+                write_line = str(pressed_key) + ', ' + str(truncate(time/6 , 3)) + ', button-23.wav'
+                print(write_line)   
+                f.write("%s\n" % write_line)
     # beat screen #
     effect_screen.blit(beat_screen, (0, 0))   
     
