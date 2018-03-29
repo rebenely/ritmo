@@ -161,7 +161,7 @@ while True:
                 size_effect = 20
                 hit_happened = False
 
-                write_line = str(pressed_key) + ', ' + str(truncate(time/6 - 1/60, 3)) + ', CYCdh_ElecK03-Kick01.wav'
+                write_line = str(pressed_key) + ', ' + str(truncate(time/6, 3)) + ', CYCdh_ElecK03-Kick01.wav'
                 print(write_line)   
                 f.write("%s\n" % write_line)
             if event.key == pygame.K_k :
@@ -179,7 +179,7 @@ while True:
                 size_effect = 20
                 hit_happened = False
 
-                write_line = str(pressed_key) + ', ' + str(truncate(time/6, 3)) + ', CYCdh_ElecK03-Clap01.wav'
+                write_line = str(pressed_key) + ', ' + str(truncate(time/6  , 3)) + ', CYCdh_ElecK03-Clap01.wav'
                 print(write_line)   
                 f.write("%s\n" % write_line)
             if event.key == pygame.K_l :

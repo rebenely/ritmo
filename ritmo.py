@@ -89,7 +89,7 @@ result = -1
 #temp2 = Beat(0, 30, 'assets/button-23.wav')
 
 if(len(sys.argv) == 4):
-    
+    pygame.display.set_caption(sys.argv[1])
     song = Song(sys.argv[1], int(sys.argv[2]), sys.argv[3])
 else:
     print("Input must be:\npython ritmo.py title speed difficulty")
@@ -113,7 +113,6 @@ while True:
     #    print('yehaw')
     
     for beat in beat_list:
-        
         if not (beat.out_of_bounds()):
             beat.render(beat_screen, time)
         else:
